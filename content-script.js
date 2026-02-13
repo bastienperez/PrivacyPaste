@@ -55,7 +55,7 @@
         anonymizerUrl: "http://localhost:5001",
       });
     } catch {
-      // Extension context invalidated (reloaded) — insert original text
+      // Extension context invalidated (reloaded) - insert original text
       insertText(target, text);
       return;
     }
@@ -101,7 +101,7 @@
     } catch (err) {
       if (signal.aborted) return;
       removeOverlay(overlay);
-      // Context invalidated — just insert original text silently
+      // Context invalidated - just insert original text silently
       if (err.message?.includes("Extension context invalidated")) {
         insertText(target, text);
         return;

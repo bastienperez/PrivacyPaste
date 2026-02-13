@@ -3,7 +3,7 @@ const analyzerUrlInput = document.getElementById("analyzerUrl");
 const anonymizerUrlInput = document.getElementById("anonymizerUrl");
 const testBtn = document.getElementById("testBtn");
 const statusEl = document.getElementById("status");
-const savedIndicator = document.getElementById("savedIndicator");
+const sections = document.querySelectorAll(".section");
 
 let saveTimeout;
 
@@ -13,14 +13,20 @@ const DEFAULTS = {
   anonymizerUrl: "http://localhost:5001",
 };
 
+function updateDisabledState(enabled) {
+  sections.forEach((s) => s.classList.toggle("disabled", !enabled));
+}
+
 chrome.storage.sync.get(DEFAULTS, (settings) => {
   enabledToggle.checked = settings.enabled;
   analyzerUrlInput.value = settings.analyzerUrl;
   anonymizerUrlInput.value = settings.anonymizerUrl;
+  updateDisabledState(settings.enabled);
 });
 
 enabledToggle.addEventListener("change", () => {
   save({ enabled: enabledToggle.checked });
+  updateDisabledState(enabledToggle.checked);
 });
 
 analyzerUrlInput.addEventListener("input", () => {
@@ -83,11 +89,16 @@ function debouncedSave(data) {
 }
 
 function save(data) {
-  chrome.storage.sync.set(data, () => {
-    savedIndicator.classList.add("visible");
-    setTimeout(() => savedIndicator.classList.remove("visible"), 1500);
-  });
+  chrome.storage.sync.set(data);
 }
+
+document.getElementById("anonymizePageBtn").addEventListener("click", () => {
+  chrome.tabs.create({ url: "anonymize.html" });
+});
+
+document.getElementById("helpPageBtn").addEventListener("click", () => {
+  chrome.tabs.create({ url: "help.html" });
+});
 
 function showStatus(message, type) {
   statusEl.textContent = message;

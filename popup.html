@@ -1,178 +1,316 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
 
     body {
       width: 320px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 14px;
-      color: #1a1a1a;
-      background: #fff;
-      padding: 16px;
+      min-height: 360px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 13px;
+      color: #374151;
+      background: #ffffff;
+      overflow: hidden;
     }
 
+    /* ── Header ── */
     .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      padding: 12px 16px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f9fafb;
     }
 
-    .header h1 {
-      font-size: 16px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-icon {
+      width: 24px;
+      height: 24px;
+      background: #16a34a;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: #ffffff;
+    }
+
+    .brand h1 {
+      font-size: 15px;
       font-weight: 600;
+      color: #1f2937;
+      letter-spacing: -0.01em;
     }
 
+    /* ── Toggle Switch ── */
     .toggle {
       position: relative;
-      width: 44px;
-      height: 24px;
+      width: 40px;
+      height: 22px;
+      flex-shrink: 0;
     }
 
-    .toggle input {
-      opacity: 0;
-      width: 0;
-      height: 0;
+    .toggle input { 
+      opacity: 0; 
+      width: 0; 
+      height: 0; 
     }
 
-    .toggle-slider {
+    .toggle-track {
       position: absolute;
       inset: 0;
-      background: #ccc;
-      border-radius: 12px;
+      background: #d1d5db;
+      border-radius: 11px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s ease;
     }
 
-    .toggle-slider::before {
+    .toggle-track::before {
       content: "";
       position: absolute;
-      width: 18px;
-      height: 18px;
-      left: 3px;
-      top: 3px;
-      background: #fff;
+      width: 16px;
+      height: 16px;
+      left: 2px;
+      top: 2px;
+      background: #ffffff;
       border-radius: 50%;
-      transition: transform 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .toggle input:checked + .toggle-slider {
-      background: #4CAF50;
+    .toggle input:checked + .toggle-track {
+      background: #16a34a;
     }
 
-    .toggle input:checked + .toggle-slider::before {
-      transform: translateX(20px);
+    .toggle input:checked + .toggle-track::before {
+      transform: translateX(18px);
     }
 
+    /* ── Content ── */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ── Fields ── */
     .field {
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
     }
 
     .field label {
-      display: block;
+      display: flex;
+      align-items: center;
       font-size: 12px;
       font-weight: 500;
-      color: #555;
+      color: #374151;
       margin-bottom: 4px;
     }
 
     .field input[type="url"] {
       width: 100%;
-      padding: 8px 10px;
-      border: 1px solid #ddd;
+      padding: 6px 10px;
+      background: #ffffff;
+      border: 1px solid #d1d5db;
       border-radius: 6px;
       font-size: 13px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, monospace;
+      color: #374151;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.2s ease;
+    }
+
+    .field input[type="url"]::placeholder {
+      color: #9ca3af;
     }
 
     .field input[type="url"]:focus {
-      border-color: #4CAF50;
+      border-color: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
     }
 
     .field .hint {
       font-size: 11px;
-      color: #888;
-      margin-top: 3px;
+      color: #6b7280;
+      margin-top: 4px;
     }
 
+    /* ── Action Button ── */
     .test-btn {
       width: 100%;
-      padding: 8px;
-      background: #f5f5f5;
-      border: 1px solid #ddd;
+      padding: 8px 12px;
+      background: #16a34a;
+      border: none;
       border-radius: 6px;
       font-size: 13px;
+      font-weight: 500;
+      color: #ffffff;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s ease;
     }
 
     .test-btn:hover {
-      background: #eee;
+      background: #15803d;
+    }
+
+    .test-btn:active {
+      transform: translateY(1px);
     }
 
     .test-btn:disabled {
-      opacity: 0.6;
+      background: #9ca3af;
       cursor: not-allowed;
+      transform: none;
     }
 
+    /* ── Disabled state ── */
+    .section.disabled {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    /* ── Status Messages ── */
     .status {
-      margin-top: 8px;
-      padding: 8px 10px;
+      padding: 8px 12px;
       border-radius: 6px;
       font-size: 12px;
+      line-height: 1.4;
       display: none;
     }
 
     .status--success {
       display: block;
-      background: #e8f5e9;
-      color: #2e7d32;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #059669;
     }
 
     .status--error {
       display: block;
-      background: #ffebee;
-      color: #c62828;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
     }
 
-    .saved {
+    /* ── Section ── */
+    .section {
+      padding: 10px 16px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .section-title {
       font-size: 11px;
-      color: #4CAF50;
-      opacity: 0;
-      transition: opacity 0.3s;
-      margin-left: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9ca3af;
+      margin-bottom: 8px;
     }
 
-    .saved.visible { opacity: 1; }
+    /* ── Footer ── */
+    .footer {
+      padding: 8px 16px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #6b7280;
+      background: #f9fafb;
+    }
+
+    .footer svg {
+      width: 14px;
+      height: 14px;
+      fill: #6b7280;
+    }
+
+    .footer a {
+      color: #16a34a;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .footer a:hover {
+      color: #15803d;
+    }
   </style>
 </head>
 <body>
+
   <div class="header">
-    <h1>PrivacyPaste</h1>
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h1>PrivacyPaste</h1>
+    </div>
     <label class="toggle">
       <input type="checkbox" id="enabled">
-      <span class="toggle-slider"></span>
+      <span class="toggle-track"></span>
     </label>
   </div>
 
-  <div class="field">
-    <label for="analyzerUrl">Analyzer URL<span class="saved" id="savedIndicator">Saved</span></label>
-    <input type="url" id="analyzerUrl" placeholder="http://localhost:5002">
-    <div class="hint">Presidio Analyzer service (default port 5002)</div>
+  <div class="section">
+    <div class="section-title">Configuration</div>
+    <div class="content">
+      <div class="field">
+        <label for="analyzerUrl">Analyzer URL</label>
+        <input type="url" id="analyzerUrl" placeholder="http://localhost:5002">
+        <div class="hint">Presidio Analyzer service (default port 5002)</div>
+      </div>
+
+      <div class="field">
+        <label for="anonymizerUrl">Anonymizer URL</label>
+        <input type="url" id="anonymizerUrl" placeholder="http://localhost:5001">
+        <div class="hint">Presidio Anonymizer service (default port 5001)</div>
+      </div>
+
+      <button class="test-btn" id="testBtn">Test Connection</button>
+      <div class="status" id="status"></div>
+    </div>
   </div>
 
-  <div class="field">
-    <label for="anonymizerUrl">Anonymizer URL</label>
-    <input type="url" id="anonymizerUrl" placeholder="http://localhost:5001">
-    <div class="hint">Presidio Anonymizer service (default port 5001)</div>
+  <div class="section">
+    <div class="section-title">Tools</div>
+    <button class="test-btn" id="anonymizePageBtn" style="background: #1f2937;">I want to anonymize a text</button>
+    <button class="test-btn" id="helpPageBtn" style="background: #16a34a; margin-top: 8px;">📖 Help & Documentation</button>
   </div>
 
-  <button class="test-btn" id="testBtn">Test Connection</button>
-  <div class="status" id="status"></div>
+  <div class="footer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+      <path d="m2 17 10 5 10-5"/>
+      <path d="m2 12 10 5 10-5"/>
+    </svg>
+    Powered by <a href="https://clidsys.com" target="_blank" rel="noopener noreferrer">Clidsys</a>
+  </div>
 
   <script src="popup.js"></script>
 </body>

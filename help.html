@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrivacyPaste - Help</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+      color: #374151;
+      background: #ffffff;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: #16a34a;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1f2937;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-top: 32px;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #374151;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-left: 4px solid #0ea5e9;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+
+    .highlight-box h3 {
+      color: #0c4a6e;
+      margin-top: 0;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #16a34a;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #16a34a;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      margin: 8px 0;
+      transition: background 0.2s ease;
+    }
+
+    .cta-button:hover {
+      background: #15803d;
+    }
+
+    .external-link {
+      color: #0ea5e9;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .external-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .warning-box {
+      background: #fef3cd;
+      border: 1px solid #f59e0b;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 20px 0;
+    }
+
+    .warning-box h4 {
+      color: #92400e;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .warning-box p {
+      color: #92400e;
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    </div>
+    <h1>PrivacyPaste - Help</h1>
+  </div>
+
+  <div class="highlight-box">
+    <h3>About PrivacyPaste</h3>
+    <p>
+      <strong>PrivacyPaste</strong> is a browser extension that protects your privacy by automatically anonymizing 
+      personally identifiable information (PII) when you paste text into AI tools like ChatGPT, Claude, or Perplexity.
+    </p>
+  </div>
+
+  <h2>Technology: Microsoft Presidio</h2>
+  <p>
+    This extension is powered by <strong>Microsoft Presidio</strong>, an open-source solution developed by Microsoft 
+    for data anonymization and pseudonymization. Presidio uses advanced artificial intelligence and natural language 
+    processing techniques to identify and mask sensitive information.
+  </p>
+
+  <p>
+    📖 <a href="https://microsoft.github.io/presidio/" target="_blank" rel="noopener" class="external-link">
+      Official Microsoft Presidio documentation
+    </a>
+  </p>
+
+  <h3>Detection Capabilities</h3>
+  <p>Presidio can detect and anonymize a wide range of personal information:</p>
+  <ul class="feature-list">
+    <li>Email addresses</li>
+    <li>Phone numbers</li>
+    <li>Physical addresses</li>
+    <li>Social security numbers</li>
+    <li>Credit card numbers</li>
+    <li>Person names</li>
+    <li>IP addresses</li>
+    <li>And many other types of sensitive data</li>
+  </ul>
+
+  <div class="warning-box">
+    <h4>⚠️ Required Configuration</h4>
+    <p>
+      This extension requires a running Presidio service (Analyzer and Anonymizer). 
+      Configure the service URLs in the extension settings.
+    </p>
+  </div>
+
+  <h2>Presidio Advantages</h2>
+  <ul class="feature-list">
+    <li><strong>Open Source</strong>: Transparency and code auditability</li>
+    <li><strong>High Accuracy</strong>: AI-based intelligent detection</li>
+    <li><strong>Customizable</strong>: Add custom detection rules</li>
+    <li><strong>Multi-language</strong>: Support for many languages</li>
+    <li><strong>Reversible</strong>: Ability to restore original data</li>
+    <li><strong>Scalable</strong>: Suitable for small and large data volumes</li>
+  </ul>
+
+  <h2>Installing Presidio</h2>
+  <p>
+    To use this extension, you must first install and configure Microsoft Presidio. 
+    Consult the official installation guide to get started:
+  </p>
+
+  <a href="https://microsoft.github.io/presidio/installation/" target="_blank" rel="noopener" class="cta-button">
+    📖 Presidio Installation Guide
+  </a>
+
+  <div class="footer">
+    <p>
+      PrivacyPaste uses Microsoft Presidio to ensure the protection of your personal data.<br>
+      Developed with ❤️ by <a href="https://clidsys.com" target="_blank" rel="noopener" class="external-link">Clidsys</a>
+    </p>
+  </div>
+</body>
+</html>
