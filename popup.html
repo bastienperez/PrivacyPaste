@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 320px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 16px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle-slider::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: #4CAF50;
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(20px);
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .field input[type="url"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field input[type="url"]:focus {
+      border-color: #4CAF50;
+    }
+
+    .field .hint {
+      font-size: 11px;
+      color: #888;
+      margin-top: 3px;
+    }
+
+    .test-btn {
+      width: 100%;
+      padding: 8px;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .test-btn:hover {
+      background: #eee;
+    }
+
+    .test-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      display: none;
+    }
+
+    .status--success {
+      display: block;
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .status--error {
+      display: block;
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .saved {
+      font-size: 11px;
+      color: #4CAF50;
+      opacity: 0;
+      transition: opacity 0.3s;
+      margin-left: 8px;
+    }
+
+    .saved.visible { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>PrivacyPaste</h1>
+    <label class="toggle">
+      <input type="checkbox" id="enabled">
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+
+  <div class="field">
+    <label for="analyzerUrl">Analyzer URL<span class="saved" id="savedIndicator">Saved</span></label>
+    <input type="url" id="analyzerUrl" placeholder="http://localhost:5002">
+    <div class="hint">Presidio Analyzer service (default port 5002)</div>
+  </div>
+
+  <div class="field">
+    <label for="anonymizerUrl">Anonymizer URL</label>
+    <input type="url" id="anonymizerUrl" placeholder="http://localhost:5001">
+    <div class="hint">Presidio Anonymizer service (default port 5001)</div>
+  </div>
+
+  <button class="test-btn" id="testBtn">Test Connection</button>
+  <div class="status" id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
